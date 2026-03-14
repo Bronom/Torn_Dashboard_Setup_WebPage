@@ -1,23 +1,27 @@
 import indexHtml from "./index.html";
 
-import mergedFirmware from "./firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin";
+const GITHUB_OWNER = "Bronom";
+const GITHUB_REPO = "Torn_Dashboard_ESP32_TFT_4Inch";
 
 const manifest = {
-  "name": "ESP32-S3 Torn Dashboard",
-  "version": "1.0.0",
-  "new_install_prompt_erase": true,
-  "builds": [
+  name: "ESP32-S3 Torn Dashboard",
+  version: "latest",
+  builds: [
     {
-      "chipFamily": "ESP32-S3",
-      "parts": [
+      chipFamily: "ESP32-S3",
+      parts: [
         {
-          "path": "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin",
-          "offset": 0
+          path: "/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin",
+          offset: 0
         }
       ]
     }
   ]
 };
+
+function githubLatestAssetUrl(assetName) {
+  return `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest/download/${assetName}`;
+}
 
 export default {
   async fetch(request) {
@@ -41,9 +45,24 @@ export default {
       });
     }
 
-    if (url.pathname === "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin") {
-      return new Response(mergedFirmware, {
-        headers: { "content-type": "application/octet-stream" }
+    if (url.pathname === "/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin") {
+      const githubUrl = githubLatestAssetUrl("Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin");
+      const resp = await fetch(githubUrl, {
+        redirect: "follow",
+        headers: {
+          "User-Agent": "Cloudflare-Worker"
+        }
+      });
+
+      if (!resp.ok) {
+        return new Response(`GitHub fetch failed: ${resp.status}`, { status: 502 });
+      }
+
+      return new Response(resp.body, {
+        headers: {
+          "content-type": "application/octet-stream",
+          "cache-control": "no-store"
+        }
       });
     }
 

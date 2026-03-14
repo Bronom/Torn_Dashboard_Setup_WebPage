@@ -1,21 +1,19 @@
 import indexHtml from "./index.html";
 
-import bootloaderBin from "./firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.bootloader.bin";
-import partitionsBin from "./firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.partitions.bin";
-import bootApp0Bin from "./firmware/boot_app0.bin";
-import firmwareBin from "./firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.bin";
+import mergedFirmware from "./firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin";
 
 const manifest = {
-  name: "ESP32-S3 Torn Dashboard",
-  version: "1.0.0",
-  builds: [
+  "name": "ESP32-S3 Torn Dashboard",
+  "version": "1.0.0",
+  "new_install_prompt_erase": true,
+  "builds": [
     {
-      chipFamily: "ESP32-S3",
-      parts: [
-        { path: "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.bootloader.bin", offset: 0 },
-        { path: "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.partitions.bin", offset: 32768 },
-        { path: "/firmware/boot_app0.bin", offset: 57344 },
-        { path: "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.bin", offset: 65536 }
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        {
+          "path": "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin",
+          "offset": 0
+        }
       ]
     }
   ]
@@ -43,39 +41,9 @@ export default {
       });
     }
 
-    if (url.pathname === "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.bootloader.bin") {
-      return new Response(bootloaderBin, {
-        headers: {
-          "content-type": "application/octet-stream",
-          "cache-control": "no-store"
-        }
-      });
-    }
-
-    if (url.pathname === "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.partitions.bin") {
-      return new Response(partitionsBin, {
-        headers: {
-          "content-type": "application/octet-stream",
-          "cache-control": "no-store"
-        }
-      });
-    }
-
-    if (url.pathname === "/firmware/boot_app0.bin") {
-      return new Response(bootApp0Bin, {
-        headers: {
-          "content-type": "application/octet-stream",
-          "cache-control": "no-store"
-        }
-      });
-    }
-
-    if (url.pathname === "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.bin") {
-      return new Response(firmwareBin, {
-        headers: {
-          "content-type": "application/octet-stream",
-          "cache-control": "no-store"
-        }
+    if (url.pathname === "/firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin") {
+      return new Response(mergedFirmware, {
+        headers: { "content-type": "application/octet-stream" }
       });
     }
 

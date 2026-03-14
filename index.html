@@ -438,6 +438,24 @@
       --esp-tools-button-padding: 13px 16px;
     }
 
+    .btn-flash{
+      width:100%;
+      border:none;
+      border-radius:12px;
+      padding:14px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      background:linear-gradient(
+        180deg,
+        #ff5e56,
+        #d8443e
+      );
+      color:white;
+      box-shadow:0 6px 18px rgba(216,68,62,0.35);
+      transition:all .15s ease;
+    }
+
     .hud-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -662,7 +680,11 @@
           </p>
 
           <div class="firmware-box">
-            <esp-web-install-button manifest="/manifest.json"></esp-web-install-button>
+            <esp-web-install-button manifest="/manifest.json">
+              <button slot="activate" class="btn-flash">
+                Install / Update Firmware
+              </button>
+            </esp-web-install-button>
 
             <div class="manifest-row">
               <span class="manifest-pill">Manifest: /manifest.json</span>

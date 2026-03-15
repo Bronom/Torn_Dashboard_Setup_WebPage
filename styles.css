@@ -131,38 +131,47 @@ body::after {
 .title-row {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-.github-badge {
+.github-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-
-  background: linear-gradient(180deg, #111822, #0c1219);
-  border: 1px solid rgba(255,255,255,0.08);
-
-  color: #e6edf3;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #5a5a5a;
+  border: 1px solid var(--border);
+  color: var(--text);
   text-decoration: none;
   font-size: 13px;
   font-weight: 700;
-
-  transition: all 0.18s ease;
 }
 
-.github-badge:hover {
-  background: linear-gradient(180deg, #1a2432, #131c27);
-  border-color: rgba(255,255,255,0.15);
+.github-btn:hover {
   transform: translateY(-1px);
+  background: #1a2432;
+  border-color: var(--border-strong);
 }
 
-.github-badge svg {
+.github-btn:active {
+  transform: translateY(0);
+}
+
+.github-btn svg {
   width: 14px;
   height: 14px;
-  fill: currentColor;
+  min-width: 14px;
+  min-height: 14px;
+  display: block;
+}
+
+.github-btn.icon-only {
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
 }
 
 .subtitle {

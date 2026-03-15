@@ -6,7 +6,7 @@
       "chipFamily": "ESP32-S3",
       "parts": [
         {
-          "path": "../firmware/Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin",
+          "path": "../Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin",
           "offset": 0
         }
       ]

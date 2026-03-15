@@ -6,7 +6,7 @@
       "chipFamily": "ESP32",
       "parts": [
         {
-          "path": "../firmware/Torn_Dashboard_Lilygo_T5_2_13.ino.merged.bin",
+          "path": "../Torn_Dashboard_Lilygo_T5_2_13.ino.merged.bin",
           "offset": 0
         }
       ]

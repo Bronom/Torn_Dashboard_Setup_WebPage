@@ -1,0 +1,15 @@
+{
+  "name": "Torn Dashboard 4 Inch TFT",
+  "version": "latest",
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        {
+          "path": "./Torn_Dashboard_ESP32_TFT_4Inch.ino.merged.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Torn Dashboard E-Ink 2.13",
+  "version": "latest",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "./Torn_Dashboard_Lilygo_T5_2_13.ino.merged.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Torn Dashboard 2.8 Inch TFT",
+  "version": "latest",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "./Torn_Dashboard_ESP32_TFT.ino.merged.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}

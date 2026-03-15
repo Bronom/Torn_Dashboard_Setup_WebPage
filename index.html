@@ -27,9 +27,7 @@
       --radius: 22px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -119,13 +117,6 @@
         inset 0 1px 0 rgba(255,255,255,0.04),
         0 0 18px rgba(216, 68, 62, 0.12);
       flex-shrink: 0;
-    }
-
-    .logo-wrap img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      display: block;
     }
 
     .logo-fallback {
@@ -221,9 +212,7 @@
       overflow: hidden;
     }
 
-    .card + .card {
-      margin-top: 18px;
-    }
+    .card + .card { margin-top: 18px; }
 
     .card-title {
       margin: 0 0 16px;
@@ -264,7 +253,7 @@
       letter-spacing: 0.2px;
     }
 
-    input {
+    input, select {
       width: 100%;
       border: 1px solid var(--border);
       background: #091018;
@@ -280,7 +269,7 @@
       color: #6c7d92;
     }
 
-    input:focus {
+    input:focus, select:focus {
       border-color: var(--red);
       box-shadow: 0 0 0 4px rgba(216, 68, 62, 0.15);
       background: #0b131d;
@@ -295,14 +284,6 @@
     #pass {
       width: 100%;
       padding-right: 78px;
-    }
-
-    button:hover:not(.password-toggle) {
-      transform: translateY(-1px);
-    }
-
-    button:active:not(.password-toggle) {
-      transform: translateY(0);
     }
 
     .password-toggle {
@@ -335,56 +316,6 @@
       color: var(--text);
     }
 
-    .project-field {
-      position: relative;
-    }
-
-    .project-select {
-      width: 100%;
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, #101720, #0a1016);
-      color: var(--text);
-      border-radius: 13px;
-      padding: 14px 44px 14px 15px;
-      font-size: 15px;
-      font-weight: 700;
-      outline: none;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-    }
-
-    .project-select,
-    .project-select option {
-      background: #0a1016;
-      color: var(--text);
-    }
-
-    .project-select:focus {
-      border-color: var(--red);
-      box-shadow: 0 0 0 4px rgba(216, 68, 62, 0.15);
-      background: linear-gradient(180deg, #121b26, #0c131b);
-    }
-
-    .project-field::after {
-      content: "▾";
-      position: absolute;
-      right: 14px;
-      top: 41px;
-      color: var(--muted);
-      font-size: 14px;
-      pointer-events: none;
-    }
-
-    .firmware-box {
-      display: grid;
-      gap: 16px;
-      position: relative;
-      z-index: 1;
-      margin-top: 6px;
-    }
-
     .firmware-error {
       padding: 10px 12px;
       border-radius: 12px;
@@ -412,6 +343,12 @@
       font-weight: 800;
     }
 
+    .firmware-box {
+      display: grid;
+      gap: 16px;
+      margin-top: 6px;
+    }
+
     .firmware-note {
       font-size: 13px;
       line-height: 1.55;
@@ -423,8 +360,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-top: 8px;
-      position: relative;
-      z-index: 1;
     }
 
     button {
@@ -437,13 +372,8 @@
       transition: transform 0.08s ease, opacity 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
 
-    button:hover {
-      transform: translateY(-1px);
-    }
-
-    button:active {
-      transform: translateY(0);
-    }
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
 
     button:disabled {
       cursor: not-allowed;
@@ -458,9 +388,7 @@
       border: 1px solid var(--border-strong);
     }
 
-    .btn-secondary:hover:not(:disabled) {
-      background: #243243;
-    }
+    .btn-secondary:hover:not(:disabled) { background: #243243; }
 
     .btn-primary {
       background: linear-gradient(180deg, var(--red), #bc3934);
@@ -487,13 +415,6 @@
       transition: all .15s ease;
     }
 
-    .btn-flash:disabled {
-      cursor: not-allowed;
-      opacity: 0.45;
-      box-shadow: none;
-      transform: none;
-    }
-
     .btn-flash:hover:not(:disabled) {
       background: linear-gradient(180deg, #ff726b, #e34d47);
     }
@@ -504,8 +425,6 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.6;
-      position: relative;
-      z-index: 1;
     }
 
     .hud-grid {
@@ -637,27 +556,10 @@
     }
 
     @media (max-width: 640px) {
-      body {
-        padding: 14px;
-      }
-
-      .topbar,
-      .sidebar,
-      .workspace {
-        padding: 18px;
-      }
-
-      .actions {
-        grid-template-columns: 1fr;
-      }
-
-      .hud-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .title {
-        font-size: 24px;
-      }
+      body { padding: 14px; }
+      .topbar, .sidebar, .workspace { padding: 18px; }
+      .actions, .hud-grid { grid-template-columns: 1fr; }
+      .title { font-size: 24px; }
     }
   </style>
 </head>
@@ -668,11 +570,10 @@
         <div class="logo-wrap">
           <div class="logo-fallback">T</div>
         </div>
-
         <div>
           <h1 class="title">Torn Dashboard ESP32 Setup</h1>
           <p class="subtitle">
-            Serial provisioning console for your ESP32 Torn dashboard. Flash firmware, send Wi-Fi credentials and API key, then reboot into the live dashboard.
+            Flash firmware, then connect over serial and send Wi-Fi credentials and your Torn API key.
           </p>
         </div>
       </div>
@@ -726,14 +627,14 @@
         <div class="card">
           <h2 class="card-title">Firmware</h2>
           <p class="card-subtitle">
-            Select the hardware version, then install or update the latest firmware from GitHub.
+            Select the hardware version, then install the matching firmware.
           </p>
 
           <div class="firmware-box">
-            <div class="field project-field">
+            <div class="field">
               <label for="project">Project Version</label>
-              <select id="project" class="project-select">
-                <option value="" selected disabled>Select a project version...</option>
+              <select id="project">
+                <option value="" selected>Select a project version...</option>
                 <option value="4inch">4 Inch TFT</option>
                 <option value="2_8inch">2.8 Inch TFT</option>
                 <option value="eink213">E-Ink 2.13</option>
@@ -745,11 +646,11 @@
             </div>
 
             <div class="manifest-row">
-              <span class="manifest-pill">Source: GitHub release</span>
+              <span class="manifest-pill">Source: Local GitHub Pages file</span>
               <span class="manifest-pill" id="firmwareProjectLabel">Project: None</span>
             </div>
 
-            <esp-web-install-button id="installBtn" manifest="/manifest.json?project=">
+            <esp-web-install-button id="installBtn">
               <button id="flashBtn" slot="activate" class="btn-flash" disabled>
                 Install / Update Firmware
               </button>
@@ -760,7 +661,7 @@
             </esp-web-install-button>
 
             <div class="firmware-note">
-              Flash the firmware for the selected hardware, then reconnect and send the WiFi and API configuration.
+              Flash the firmware for the selected hardware, then reconnect and send WiFi and API configuration.
             </div>
           </div>
         </div>
@@ -769,8 +670,8 @@
           <h2 class="card-title">Operator Notes</h2>
           <ul class="hint-list">
             <li>Use Chrome or Edge.</li>
-            <li>Close Arduino Serial Monitor before using this page.</li>
-            <li>Flash firmware first if the board is new.</li>
+            <li>Close Arduino Serial Monitor first.</li>
+            <li>Flash firmware before sending config on a new board.</li>
             <li>After flashing, reconnect and wait for config mode.</li>
             <li>After save, the board should reboot automatically.</li>
           </ul>
@@ -828,8 +729,26 @@
     const hudAction = document.getElementById("hudAction");
     const clearLogBtn = document.getElementById("clearLogBtn");
 
+    const projectSelect = document.getElementById("project");
+    const installBtn = document.getElementById("installBtn");
+    const flashBtn = document.getElementById("flashBtn");
+    const firmwareProjectLabel = document.getElementById("firmwareProjectLabel");
+    const firmwareError = document.getElementById("firmwareError");
+
+    const manifestMap = {
+      "4inch": "./manifest-4inch.json",
+      "2_8inch": "./manifest-2_8inch.json",
+      "eink213": "./manifest-eink213.json"
+    };
+
+    const projectLabels = {
+      "4inch": "Project: 4 Inch TFT",
+      "2_8inch": "Project: 2.8 Inch TFT",
+      "eink213": "Project: E-Ink 2.13"
+    };
+
     function log(msg) {
-      logDiv.textContent += "\n" + msg;
+      logDiv.textContent += "\\n" + msg;
       logDiv.scrollTop = logDiv.scrollHeight;
     }
 
@@ -872,6 +791,28 @@
       setTimeout(() => toast.classList.remove("show"), 3500);
     }
 
+    function showFirmwareError(message) {
+      firmwareError.textContent = message;
+      firmwareError.hidden = false;
+    }
+
+    function hideFirmwareError() {
+      firmwareError.hidden = true;
+    }
+
+    function setFirmwareProjectState(project) {
+      if (!project || !manifestMap[project]) {
+        installBtn.removeAttribute("manifest");
+        firmwareProjectLabel.textContent = "Project: None";
+        flashBtn.disabled = true;
+        return;
+      }
+
+      installBtn.setAttribute("manifest", manifestMap[project]);
+      firmwareProjectLabel.textContent = projectLabels[project] || "Project: Unknown";
+      flashBtn.disabled = false;
+    }
+
     togglePassBtn.addEventListener("click", () => {
       const isPassword = passInput.type === "password";
       passInput.type = isPassword ? "text" : "password";
@@ -881,6 +822,34 @@
     clearLogBtn.addEventListener("click", () => {
       logDiv.textContent = "Log cleared...";
     });
+
+    projectSelect.addEventListener("change", () => {
+      const project = projectSelect.value;
+
+      if (!project) {
+        setFirmwareProjectState("");
+        showFirmwareError("Please select a project version before installing firmware.");
+        return;
+      }
+
+      setFirmwareProjectState(project);
+      hideFirmwareError();
+      setAction("Firmware selected", "blue");
+      log(`Selected firmware project: ${project}`);
+    });
+
+    flashBtn.addEventListener("click", (e) => {
+      const project = projectSelect.value;
+      if (!project || !manifestMap[project]) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        showFirmwareError("Please select a project version before installing firmware.");
+        setAction("Select project", "red");
+        return false;
+      }
+      hideFirmwareError();
+    }, true);
 
     async function connect() {
       try {
@@ -896,8 +865,7 @@
 
         port = await navigator.serial.requestPort();
         const info = port.getInfo();
-
-        log(`Selected port VID=${info.usbVendorId} PID=${info.usbProductId}`);
+        log(`Selected port VID=${info.usbVendorId || "?"} PID=${info.usbProductId || "?"}`);
 
         await port.open({ baudRate: 115200 });
 
@@ -914,7 +882,7 @@
           if (done) break;
 
           if (value) {
-            const lines = value.split("\n");
+            const lines = value.split("\\n");
             for (const line of lines) {
               const clean = line.trim();
               if (!clean) continue;
@@ -976,7 +944,7 @@
         }
 
         const writer = port.writable.getWriter();
-        await writer.write(new TextEncoder().encode(JSON.stringify(config) + "\n"));
+        await writer.write(new TextEncoder().encode(JSON.stringify(config) + "\\n"));
         writer.releaseLock();
 
         sendBtn.disabled = true;
@@ -993,72 +961,12 @@
       }
     }
 
-    const projectSelect = document.getElementById("project");
-    const installBtn = document.getElementById("installBtn");
-    const flashBtn = document.getElementById("flashBtn");
-    const firmwareProjectLabel = document.getElementById("firmwareProjectLabel");
-    const firmwareError = document.getElementById("firmwareError");
-
-    const projectLabels = {
-      "4inch": "Project: 4 Inch TFT",
-      "2_8inch": "Project: 2.8 Inch TFT",
-      "eink213": "Project: E-Ink 2.13"
-    };
-
-    function showFirmwareError(message) {
-      firmwareError.textContent = message;
-      firmwareError.hidden = false;
-    }
-
-    function hideFirmwareError() {
-      firmwareError.hidden = true;
-    }
-
-    function setFirmwareProjectState(project) {
-      if (!project) {
-        installBtn.setAttribute("manifest", "/manifest.json?project=");
-        firmwareProjectLabel.textContent = "Project: None";
-        flashBtn.disabled = true;
-        return;
-      }
-
-      installBtn.setAttribute("manifest", `/manifest.json?project=${encodeURIComponent(project)}`);
-      firmwareProjectLabel.textContent = projectLabels[project] || "Project: Unknown";
-      flashBtn.disabled = false;
-    }
-
-    setFirmwareProjectState("");
-
-    projectSelect.addEventListener("change", () => {
-      const project = projectSelect.value;
-
-      if (!project) {
-        setFirmwareProjectState("");
-        showFirmwareError("Please select a project version before installing firmware.");
-        return;
-      }
-
-      setFirmwareProjectState(project);
-      hideFirmwareError();
-    });
-
-    flashBtn.addEventListener("click", (e) => {
-      const project = projectSelect.value;
-
-      if (!project) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        showFirmwareError("Please select a project version before installing firmware.");
-        setAction("Select project", "red");
-        return false;
-      }
-
-      hideFirmwareError();
-    }, true);
-
     document.getElementById("connectBtn").addEventListener("click", connect);
     document.getElementById("sendBtn").addEventListener("click", send);
+
+    setFirmwareProjectState("");
+    setReady("idle");
+    setConnected(false);
   </script>
 </body>
 </html>

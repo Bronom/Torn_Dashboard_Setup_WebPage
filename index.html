@@ -865,6 +865,7 @@
 
         port = await navigator.serial.requestPort();
         const info = port.getInfo();
+
         log(`Selected port VID=${info.usbVendorId || "?"} PID=${info.usbProductId || "?"}`);
 
         await port.open({ baudRate: 115200 });
@@ -873,39 +874,57 @@
         setAction("Connected", "green");
         log("ESP32 connected");
 
+        // Optional: allow sending immediately after connect
+        // This makes the UI much less fragile.
+        espReady = true;
+        setReady("ready");
+
         const decoder = new TextDecoderStream();
-        port.readable.pipeTo(decoder.writable);
+        port.readable.pipeTo(decoder.writable).catch(() => {});
         reader = decoder.readable.getReader();
+
+        let buffer = "";
 
         while (true) {
           const { value, done } = await reader.read();
           if (done) break;
+          if (!value) continue;
 
-          if (value) {
-            const lines = value.split("\\n");
-            for (const line of lines) {
-              const clean = line.trim();
-              if (!clean) continue;
+          buffer += value;
 
-              log("ESP32: " + clean);
+          let lines = buffer.split(/\r?\n/);
+          buffer = lines.pop(); // keep incomplete line in buffer
 
-              if (clean.includes("WAITING_CONFIG")) {
-                espReady = true;
-                setReady("ready");
-                setAction("Config mode", "green");
-              }
+          for (const line of lines) {
+            const clean = line.trim();
+            if (!clean) continue;
 
-              if (clean.includes("CONFIG_SAVED")) {
-                espReady = false;
-                setReady("waiting");
-                setAction("Saved", "green");
-                showToast();
-                log("Configuration saved. ESP32 should reboot.");
-              }
+            log("ESP32: " + clean);
 
-              if (clean.includes("JSON_ERROR")) {
-                setAction("JSON error", "red");
-              }
+            if (
+              clean.includes("WAITING_CONFIG") ||
+              clean.includes("Waiting for config") ||
+              clean.includes("READY_FOR_CONFIG") ||
+              clean.includes("Ready for config")
+            ) {
+              espReady = true;
+              setReady("ready");
+              setAction("Config mode", "green");
+            }
+
+            if (
+              clean.includes("CONFIG_SAVED") ||
+              clean.includes("Config saved")
+            ) {
+              espReady = false;
+              setReady("waiting");
+              setAction("Saved", "green");
+              showToast();
+              log("Configuration saved. ESP32 should reboot.");
+            }
+
+            if (clean.includes("JSON_ERROR")) {
+              setAction("JSON error", "red");
             }
           }
         }
@@ -919,15 +938,11 @@
 
     async function send() {
       try {
+        log("Send button clicked");
+
         if (!port || !port.writable) {
           log("Connect the ESP32 first.");
           setAction("No device", "red");
-          return;
-        }
-
-        if (!espReady) {
-          log("ESP32 is not ready yet.");
-          setAction("Not ready", "red");
           return;
         }
 
@@ -943,8 +958,15 @@
           return;
         }
 
+        if (!espReady) {
+          log("ESP32 did not report ready, sending anyway...");
+        }
+
+        const payload = JSON.stringify(config) + "\n";
+        log("Sending JSON to ESP32...");
+
         const writer = port.writable.getWriter();
-        await writer.write(new TextEncoder().encode(JSON.stringify(config) + "\\n"));
+        await writer.write(new TextEncoder().encode(payload));
         writer.releaseLock();
 
         sendBtn.disabled = true;

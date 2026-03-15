@@ -6,7 +6,7 @@
       "chipFamily": "ESP32",
       "parts": [
         {
-          "path": "../Torn_Dashboard_ESP32_TFT.ino.merged.bin",
+          "path": "../../Torn_Dashboard_ESP32_TFT.ino.merged.bin",
           "offset": 0
         }
       ]

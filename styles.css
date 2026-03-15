@@ -124,6 +124,50 @@ body::after {
   letter-spacing: 0.3px;
 }
 
+.title-row-wrap {
+  min-width: 0;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: #111822;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  transition: transform 0.08s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.github-btn:hover {
+  transform: translateY(-1px);
+  background: #1a2432;
+  border-color: var(--border-strong);
+}
+
+.github-btn:active {
+  transform: translateY(0);
+}
+
+.github-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
 .subtitle {
   margin: 6px 0 0;
   color: var(--muted);
@@ -576,4 +620,6 @@ button:disabled {
   .topbar, .sidebar, .workspace { padding: 18px; }
   .actions, .hud-grid { grid-template-columns: 1fr; }
   .title { font-size: 24px; }
+  .title-row { align-items: flex-start; }
+  .github-btn { padding: 8px 11px; }
 }

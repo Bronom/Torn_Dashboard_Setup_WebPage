@@ -1,9 +1,7 @@
-const basePath = window.location.pathname.replace(/\/[^/]*$/, "/");
-
 export const manifestMap = {
-  "4inch": `${basePath}firmware/manifest/manifest-4inch.json`,
-  "2_8inch": `${basePath}firmware/manifest/manifest-2_8inch.json`,
-  "eink213": `${basePath}firmware/manifest/manifest-eink213.json`
+  "4inch": `/firmware/manifest/manifest-4inch.json`,
+  "2_8inch": `/firmware/manifest/manifest-2_8inch.json`,
+  "eink213": `/firmware/manifest/manifest-eink213.json`
 };
 
 export const projectLabels = {

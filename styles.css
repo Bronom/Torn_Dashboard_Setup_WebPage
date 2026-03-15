@@ -138,17 +138,15 @@ body::after {
 .github-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 12px;
-  border-radius: 12px;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
   background: #111822;
   border: 1px solid var(--border);
   color: var(--text);
   text-decoration: none;
   font-size: 13px;
-  font-weight: 800;
-  line-height: 1;
-  transition: transform 0.08s ease, background 0.18s ease, border-color 0.18s ease;
+  font-weight: 700;
 }
 
 .github-btn:hover {
@@ -162,10 +160,18 @@ body::after {
 }
 
 .github-btn svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  min-height: 14px;
+  display: block;
+}
+
+.github-btn.icon-only {
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
 }
 
 .subtitle {

@@ -40,6 +40,7 @@ There are different versions of the Torn Dashboard, each designed for different 
 - Display -> Player Name, Id, Level, Torn Time, Refresh Timer, Notification, Money, Organized Crime (OC) Timer, Ranked War (RW), Status, Energy, Nerve, Happy, Life, Chain, Cooldown.
 - Refresh Every 60 Sec.
 - Press on the screen to turn off the display.
+- Hold Boot button 2 sec to reset Wifi and API Key config. (Need to be reconfigured by the website.) (Flash/Install/Update Not required)
 
 
 ## Hardware
@@ -99,6 +100,7 @@ For a larger screen, the **4-inch TFT version** offers more space for displaying
 - Bigger version of the 2.8 Inch.
 - Same Layout but bigger.
 - Display -> Player Name, Id, Level, Torn Time, Refresh Timer, Notification, Money, Organized Crime (OC) Timer, Ranked War (RW), Status, Energy, Nerve, Happy, Life, Chain, Cooldown.
+- Hold Boot button 2sec to reset Wifi and API Key config. (Need to be reconfigured by the website.) (Flash/Install/Update Not required)
 
 
 ## Hardware
@@ -151,12 +153,13 @@ For a larger screen, the **4-inch TFT version** offers more space for displaying
 
 The **E-Ink version** is designed for a low-power, always-on display where you don’t need interaction, but still want to view the player stats. 
 
-**Changes:**
+**Feature:**
 - The display is low refresh rate and monochrome.
 - More Compact UI.
 - Display -> Player Name, Id, Level, Energy, Nerve, Happy, Life, Chain, Money, Status, Cooldown, Torn Time, Local Time.
 - Refresh Every 5 min.
-- Refresh Button to force a refresh (30 Sec limit).
+- Refresh Button to force a refresh (Single press of Hold less than 3 sec) (30 Sec limit per refresh).
+- Hold Boot button 10sec to reset Wifi and API Key config. (Need to be reconfigured by the website.) (Flash/Install/Update Not required)
 
 ## Hardware
 
@@ -176,12 +179,12 @@ Go to : https://bronom.github.io/Torn_Dashboard_Setup/
 
 Take a look to the Operator note at the bottom.
 
-1. Flash the firmware with your modele of board.
+1. Flash the firmware with your modele of board. (Not required if you only want to send Wifi and API Key config after a config reset)
   1. Pick your project version.
   2. Install / Update Firmware and pick the right COM port (USB).
   3. Follow the step and wait for the success message.
      
-2. Once the flashing done with a yellow message on screen. Send the  config info to the board.
+2. Once the flashing done with a yellow message on screen. Send the config info to the board.
   1. Enter your Wifi and Torn information above (SSID, Password, Torn API Key)
   2. Press Connect ESP32 and pick the right COM port (USB).
   3. Once properly connected. Press Send Config button

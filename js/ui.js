@@ -20,16 +20,18 @@ export function createUI() {
     firmwareProjectLabel: document.getElementById("firmwareProjectLabel"),
     firmwareError: document.getElementById("firmwareError"),
     ssidInput: document.getElementById("ssid"),
-    apiInput: document.getElementById("api")
+    apiInput: document.getElementById("api"),
+
+    advancedJsonToggle: document.getElementById("advancedJsonToggle"),
+    advancedJsonWrap: document.getElementById("advancedJsonWrap"),
+    advancedJson: document.getElementById("advancedJson")
   };
 
   let autoScroll = true;
 
   elements.logDiv.addEventListener("scroll", () => {
     const nearBottom =
-      elements.logDiv.scrollHeight -
-        elements.logDiv.scrollTop -
-        elements.logDiv.clientHeight < 10;
+      elements.logDiv.scrollHeight - elements.logDiv.scrollTop - elements.logDiv.clientHeight < 10;
     autoScroll = nearBottom;
   });
 
@@ -40,10 +42,8 @@ export function createUI() {
       now.getHours().toString().padStart(2, "0") + ":" +
       now.getMinutes().toString().padStart(2, "0") + ":" +
       now.getSeconds().toString().padStart(2, "0");
-
-    line.innerHTML = `<span class="log-time">${time}</span> <span class="log-${type}">${msg}</span>`;
+    line.innerHTML = `${time} ${msg}`;
     elements.logDiv.appendChild(line);
-
     if (autoScroll) {
       elements.logDiv.scrollTop = elements.logDiv.scrollHeight;
     }
@@ -101,13 +101,78 @@ export function createUI() {
     elements.firmwareError.hidden = true;
   }
 
-  function getConfigValues() {
+  function updateAdvancedMode() {
+    const advanced = elements.advancedJsonToggle.checked;
+
+    elements.advancedJsonWrap.hidden = !advanced;
+
+    elements.ssidInput.disabled = advanced;
+    elements.passInput.disabled = advanced;
+    elements.apiInput.disabled = advanced;
+
+    if (elements.togglePassBtn) {
+      elements.togglePassBtn.disabled = advanced;
+    }
+  }
+
+  function parseAdvancedJson(text) {
+    let parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      throw new Error("Advanced JSON is not valid JSON.");
+    }
+
+    if (!parsed || typeof parsed !== "object") {
+      throw new Error("Advanced JSON must be an object.");
+    }
+
+    if (!Array.isArray(parsed.wifi) || parsed.wifi.length === 0) {
+      throw new Error('Advanced JSON must include a "wifi" array with at least one entry.');
+    }
+
+    for (const entry of parsed.wifi) {
+      if (!entry || typeof entry.ssid !== "string" || !entry.ssid.trim()) {
+        throw new Error('Each wifi entry must include a non-empty "ssid".');
+      }
+      if (typeof entry.pass !== "string") {
+        throw new Error('Each wifi entry must include a "pass" string.');
+      }
+    }
+
+    if (typeof parsed.api !== "string" || !parsed.api.trim()) {
+      throw new Error('Advanced JSON must include a non-empty "api".');
+    }
+
     return {
+      wifi: parsed.wifi.map((entry) => ({
+        ssid: entry.ssid.trim(),
+        pass: entry.pass
+      })),
+      api: parsed.api.trim()
+    };
+  }
+
+  function getConfigValues() {
+    const advanced = elements.advancedJsonToggle.checked;
+
+    if (advanced) {
+      return {
+        mode: "advanced",
+        ...parseAdvancedJson(elements.advancedJson.value.trim())
+      };
+    }
+
+    return {
+      mode: "basic",
       ssid: elements.ssidInput.value.trim(),
       pass: elements.passInput.value,
       api: elements.apiInput.value.trim()
     };
   }
+
+  elements.advancedJsonToggle?.addEventListener("change", updateAdvancedMode);
+  updateAdvancedMode();
 
   return {
     elements,

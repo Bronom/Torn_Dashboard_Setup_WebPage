@@ -99,19 +99,40 @@ export function createSerialController(ui) {
 
       const config = ui.getConfigValues();
 
-      if (!config.ssid || !config.api) {
-        ui.log("SSID and API key are required.", "error");
-        ui.setAction("Missing fields", "red");
-        return;
+      let payloadObject;
+
+      if (config.mode === "advanced") {
+        if (!config.wifi || !config.wifi.length || !config.api) {
+          ui.log("Advanced JSON must contain wifi[] and api.", "error");
+          ui.setAction("Missing JSON fields", "red");
+          return;
+        }
+
+        payloadObject = {
+          wifi: config.wifi,
+          api: config.api
+        };
+      } else {
+        if (!config.ssid || !config.api) {
+          ui.log("SSID and API key are required.", "error");
+          ui.setAction("Missing fields", "red");
+          return;
+        }
+
+        payloadObject = {
+          ssid: config.ssid,
+          pass: config.pass,
+          api: config.api
+        };
       }
 
       if (!espReady) {
         ui.log("ESP32 did not report ready, sending anyway...");
       }
 
-      const payload = JSON.stringify(config) + "\n";
-      ui.log("Sending JSON to ESP32...");
+      const payload = JSON.stringify(payloadObject) + "\n";
 
+      ui.log("Sending JSON to ESP32...");
       const writer = port.writable.getWriter();
       await writer.write(new TextEncoder().encode(payload));
       writer.releaseLock();
@@ -119,11 +140,29 @@ export function createSerialController(ui) {
       ui.elements.sendBtn.disabled = true;
       ui.setAction("Config sent", "blue");
 
-      ui.log("Config sent: " + JSON.stringify({
-        ssid: config.ssid,
-        pass: config.pass ? "***" : "",
-        api: config.api ? "***" : ""
-      }), "success");
+      if (config.mode === "advanced") {
+        ui.log(
+          "Config sent: " +
+            JSON.stringify({
+              wifi: payloadObject.wifi.map((w) => ({
+                ssid: w.ssid,
+                pass: w.pass ? "***" : ""
+              })),
+              api: "***"
+            }),
+          "success"
+        );
+      } else {
+        ui.log(
+          "Config sent: " +
+            JSON.stringify({
+              ssid: payloadObject.ssid,
+              pass: payloadObject.pass ? "***" : "",
+              api: "***"
+            }),
+          "success"
+        );
+      }
     } catch (err) {
       ui.log("Send error: " + err.message, "error");
       ui.setAction("Send failed", "red");

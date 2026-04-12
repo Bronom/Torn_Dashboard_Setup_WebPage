@@ -6,7 +6,7 @@ export function createSerialController(ui) {
   async function connect() {
     try {
       if (!("serial" in navigator)) {
-        ui.log("Web Serial is not supported in this browser. Use Chrome or Edge.", "error");
+        ui.log("Web Serial is not supported in this browser.\nUse Chrome or Edge.", "error");
         ui.setAction("Unsupported", "red");
         return;
       }
@@ -19,8 +19,10 @@ export function createSerialController(ui) {
       const info = port.getInfo();
 
       ui.log(`Selected port VID=${info.usbVendorId || "?"} PID=${info.usbProductId || "?"}`);
-
       await port.open({ baudRate: 115200 });
+
+      // Give freshly flashed / freshly reset boards time to settle
+      await new Promise((resolve) => setTimeout(resolve, 1200));
 
       ui.setConnected(true);
       ui.setAction("Connected", "green");
@@ -34,14 +36,12 @@ export function createSerialController(ui) {
       reader = decoder.readable.getReader();
 
       let buffer = "";
-
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
         if (!value) continue;
 
         buffer += value;
-
         const lines = buffer.split(/\r?\n/);
         buffer = lines.pop();
 
@@ -62,10 +62,7 @@ export function createSerialController(ui) {
             ui.setAction("Config mode", "green");
           }
 
-          if (
-            clean.includes("CONFIG_SAVED") ||
-            clean.includes("Config saved")
-          ) {
+          if (clean.includes("CONFIG_SAVED") || clean.includes("Config saved")) {
             espReady = false;
             ui.setReady("waiting");
             ui.setAction("Saved", "green");
@@ -82,8 +79,15 @@ export function createSerialController(ui) {
     } catch (err) {
       ui.setConnected(false);
       ui.setReady("idle");
-      ui.setAction("Connect failed", "red");
-      ui.log("Connect error: " + err.message, "error");
+
+      const msg = (err?.message || "").toLowerCase();
+      if (msg.includes("frame") || msg.includes("framing") || msg.includes("parity") || msg.includes("buffer")) {
+        ui.setAction("Device rebooting", "blue");
+        ui.log("Serial framing error right after flash. The board is likely still rebooting. Try Connect again in 1 second.", "error");
+      } else {
+        ui.setAction("Connect failed", "red");
+        ui.log("Connect error: " + err.message, "error");
+      }
     }
   }
 

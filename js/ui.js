@@ -102,7 +102,7 @@ export function createUI() {
   }
 
   function updateAdvancedMode() {
-    const advanced = elements.advancedJsonToggle?.checked ?? false;
+    const advanced = elements.advancedJsonToggle.checked;
 
     elements.advancedJsonWrap.hidden = !advanced;
 
@@ -112,16 +112,6 @@ export function createUI() {
 
     if (elements.togglePassBtn) {
       elements.togglePassBtn.disabled = advanced;
-    }
-
-    if (advanced && !elements.advancedJson.value.trim()) {
-      elements.advancedJson.value = `{
-    "wifi": [
-      { "ssid": "SSID", "pass": "PASSWORD" },
-      { "ssid": "SSID_2", "pass": "PASSWORD_2" }
-    ],
-    "api": "YOUR_TORN_API_KEY"
-  }`;
     }
   }
 

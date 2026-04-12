@@ -21,9 +21,10 @@ export function createUI() {
     firmwareError: document.getElementById("firmwareError"),
     ssidInput: document.getElementById("ssid"),
     apiInput: document.getElementById("api"),
+
     advancedJsonToggle: document.getElementById("advancedJsonToggle"),
     advancedJsonWrap: document.getElementById("advancedJsonWrap"),
-    advancedJson: document.getElementById("advancedJson"),
+    advancedJson: document.getElementById("advancedJson")
   };
 
   let autoScroll = true;
@@ -34,17 +35,15 @@ export function createUI() {
     autoScroll = nearBottom;
   });
 
-  function log(msg) {
+  function log(msg, type = "info") {
     const line = document.createElement("div");
     const now = new Date();
     const time =
       now.getHours().toString().padStart(2, "0") + ":" +
       now.getMinutes().toString().padStart(2, "0") + ":" +
       now.getSeconds().toString().padStart(2, "0");
-
     line.innerHTML = `${time} ${msg}`;
     elements.logDiv.appendChild(line);
-
     if (autoScroll) {
       elements.logDiv.scrollTop = elements.logDiv.scrollHeight;
     }
@@ -120,7 +119,6 @@ export function createUI() {
 
   function parseAdvancedJson(text) {
     let parsed;
-
     try {
       parsed = JSON.parse(text);
     } catch {
@@ -151,19 +149,19 @@ export function createUI() {
     return {
       wifi: parsed.wifi.map((entry) => ({
         ssid: entry.ssid.trim(),
-        pass: entry.pass,
+        pass: entry.pass
       })),
-      api: parsed.api.trim(),
+      api: parsed.api.trim()
     };
   }
 
   function getConfigValues() {
-    const advanced = elements.advancedJsonToggle?.checked ?? false;
+    const advanced = elements.advancedJsonToggle.checked;
 
     if (advanced) {
       return {
         mode: "advanced",
-        ...parseAdvancedJson(elements.advancedJson.value.trim()),
+        ...parseAdvancedJson(elements.advancedJson.value.trim())
       };
     }
 
@@ -171,20 +169,11 @@ export function createUI() {
       mode: "basic",
       ssid: elements.ssidInput.value.trim(),
       pass: elements.passInput.value,
-      api: elements.apiInput.value.trim(),
+      api: elements.apiInput.value.trim()
     };
   }
 
   elements.advancedJsonToggle?.addEventListener("change", updateAdvancedMode);
-
-  elements.togglePassBtn?.addEventListener("click", () => {
-    const hidden = elements.passInput.type === "password";
-    elements.passInput.type = hidden ? "text" : "password";
-    elements.togglePassBtn.textContent = hidden ? "Hide" : "Show";
-  });
-
-  elements.clearLogBtn?.addEventListener("click", clearLog);
-
   updateAdvancedMode();
 
   return {
@@ -197,6 +186,6 @@ export function createUI() {
     showToast,
     showFirmwareError,
     hideFirmwareError,
-    getConfigValues,
+    getConfigValues
   };
 }

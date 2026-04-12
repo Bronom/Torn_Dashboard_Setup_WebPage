@@ -63,9 +63,9 @@
 
             <div class="field">
               <label for="pass">WiFi Password</label>
-              <div class="input-with-button">
+              <div class="input-wrap">
                 <input id="pass" type="password" placeholder="Enter your WiFi password" />
-                <button id="togglePassBtn">Show</button>
+                <button type="button" class="password-toggle" id="togglePassBtn">Show</button>
               </div>
             </div>
 
@@ -87,21 +87,27 @@
             <span>Advanced Setup (JSON)</span>
           </label>
 
-          <div id="advancedJsonWrap" style="display: none;">
+          <div id="advancedJsonWrap" class="advanced-json-wrap" hidden>
             <label for="advancedJson">Advanced JSON Config</label>
-
             <textarea
               id="advancedJson"
               rows="12"
               spellcheck="false"
-          >{
-            "wifi": [
-              { "ssid": "SSID", "pass": "PASSWORD" },
-              { "ssid": "SSID_2", "pass": "PASSWORD_2" }
-            ],
-            "api": "YOUR_TORN_API_KEY"
-          }</textarea>
-          </div>
+              placeholder='{
+  "wifi": [
+    { "ssid": "SSID", "pass": "PASSWORD" },
+    { "ssid": "SSID_2", "pass": "PASSWORD_2" }
+  ],
+  "api": "YOUR_TORN_API_KEY"
+}'>
+{
+  "wifi": [
+    { "ssid": "SSID", "pass": "PASSWORD" },
+    { "ssid": "SSID_2", "pass": "PASSWORD_2" }
+  ],
+  "api": "YOUR_TORN_API_KEY"
+}
+            </textarea>
             <p class="helper-text">
               When enabled, this JSON will be sent instead of the WiFi / Password / API fields.
             </p>

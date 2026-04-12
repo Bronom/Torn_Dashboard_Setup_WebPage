@@ -354,94 +354,6 @@ input:focus, select:focus {
   color: var(--text);
 }
 
-.input-with-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-with-button input {
-  width: 100%;
-  padding-right: 80px; /* space for button */
-}
-
-.input-with-button button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  
-  height: 28px;
-  padding: 0 10px;
-  border-radius: 6px;
-}
-
-input:disabled {
-  opacity: 0.6;
-}
-
-.input-with-button {
-  min-height: 48px;
-}
-
-.advanced-config {
-  margin-top: 16px;
-}
-
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.checkbox-row input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-}
-
-#advancedJsonWrap {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-#advancedJsonWrap.visible {
-  display: block;
-  opacity: 1;
-}
-
-#advancedJson {
-  width: 100%;
-  min-height: 220px;
-  resize: vertical;
-
-  font-family: monospace;
-  font-size: 14px;
-  line-height: 1.5;
-
-  padding: 12px;
-  border-radius: 10px;
-
-  background: #0b1016;
-  color: #edf3fa;
-
-  border: 1px solid #263241;
-
-  outline: none;
-  box-sizing: border-box;
-}
-
-#advancedJson:focus {
-  border-color: #3b4a5d;
-  box-shadow: 0 0 0 1px #3b4a5d;
-}
-
-#advancedJson::placeholder {
-  color: #93a4b8;
-}
-
 .firmware-error {
   padding: 10px 12px;
   border-radius: 12px;
@@ -685,6 +597,58 @@ button:disabled {
   font-size: 13px;
   color: #cbf3db;
   line-height: 1.45;
+}
+
+.advanced-config {
+  margin-top: 16px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.advanced-json-wrap {
+  display: grid;
+  gap: 8px;
+}
+
+#advancedJson {
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  background: #0b1016;
+  color: #edf3fa;
+
+  border: 1px solid #263241;
+
+  outline: none;
+  box-sizing: border-box;
+}
+
+#advancedJson:focus {
+  border-color: #3b4a5d;
+  box-shadow: 0 0 0 1px #3b4a5d;
+}
+
+#advancedJson::placeholder {
+  color: #93a4b8;
 }
 
 .helper-text {

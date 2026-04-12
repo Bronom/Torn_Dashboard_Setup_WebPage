@@ -625,12 +625,30 @@ button:disabled {
   width: 100%;
   min-height: 220px;
   resize: vertical;
+
   font-family: monospace;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
+
   padding: 12px;
   border-radius: 10px;
+
+  background: #0b1016;
+  color: #edf3fa;
+
+  border: 1px solid #263241;
+
+  outline: none;
   box-sizing: border-box;
+}
+
+#advancedJson:focus {
+  border-color: #3b4a5d;
+  box-shadow: 0 0 0 1px #3b4a5d;
+}
+
+#advancedJson::placeholder {
+  color: #93a4b8;
 }
 
 .helper-text {

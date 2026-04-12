@@ -327,7 +327,7 @@ input:focus, select:focus {
 .password-toggle {
   position: absolute;
   right: 8px;
-  /* top: 50%; */
+  top: 20%;
   /* transform: translateY(-50%); */
   margin: 0;
   height: 30px;

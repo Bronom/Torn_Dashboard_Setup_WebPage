@@ -645,6 +645,38 @@ textarea:disabled {
   cursor: not-allowed;
 }
 
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+#advancedJsonWrap[hidden] {
+  display: none !important;
+}
+
+#advancedJson {
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px;
+  border-radius: 10px;
+  background: #0b1016;
+  color: #edf3fa;
+  border: 1px solid #263241;
+  box-sizing: border-box;
+}
+
+#advancedJson:focus {
+  outline: none;
+  border-color: #3b4a5d;
+  box-shadow: 0 0 0 1px #3b4a5d;
+}
+
 @media (max-width: 980px) {
   .topbar {
     flex-direction: column;

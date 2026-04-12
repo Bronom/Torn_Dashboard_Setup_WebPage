@@ -102,17 +102,16 @@ export function createUI() {
   }
 
   function updateAdvancedMode() {
-    const advanced = elements.advancedJsonToggle.checked;
+    const advanced = elements.advancedJsonToggle?.checked ?? false;
 
-    elements.advancedJsonWrap.hidden = !advanced;
-
-    elements.ssidInput.disabled = advanced;
-    elements.passInput.disabled = advanced;
-    elements.apiInput.disabled = advanced;
-
-    if (elements.togglePassBtn) {
-      elements.togglePassBtn.disabled = advanced;
+    if (elements.advancedJsonWrap) {
+      elements.advancedJsonWrap.hidden = !advanced;
     }
+
+    if (elements.ssidInput) elements.ssidInput.disabled = advanced;
+    if (elements.passInput) elements.passInput.disabled = advanced;
+    if (elements.apiInput) elements.apiInput.disabled = advanced;
+    if (elements.togglePassBtn) elements.togglePassBtn.disabled = advanced;
   }
 
   function parseAdvancedJson(text) {

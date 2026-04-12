@@ -2,83 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
   <title>Torn Dashboard ESP32 Setup</title>
 
-  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
-  <link rel="stylesheet" href="./styles.css" />
+  <script
+    type="module"
+    src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
+  ></script>
+
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <div class="app">
-    <div class="topbar">
-      <div class="brand">
-        <div class="logo-wrap">
-          <div class="logo-fallback">T</div>
-        </div>
-        <div class="title-row-wrap">
-          <div class="title-row">
-            <h1 class="title">Torn Dashboard ESP32 Setup</h1>
-
-            <a class="github-btn icon-only"
-              href="https://github.com/Bronom/Torn_Dashboard_Setup"
-              target="_blank"
-              title="GitHub Repository">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.11.79-.25.79-.56 0-.28-.01-1.2-.02-2.18-3.2.69-3.88-1.36-3.88-1.36-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.24.72-1.53-2.56-.29-5.26-1.28-5.26-5.68 0-1.25.45-2.28 1.17-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.14 1.18a10.9 10.9 0 0 1 5.72 0c2.18-1.49 3.14-1.18 3.14-1.18.62 1.58.23 2.75.11 3.04.73.8 1.17 1.83 1.17 3.08 0 4.41-2.7 5.39-5.28 5.67.42.36.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.68.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
-              </svg>
-            </a>
-          </div>
-
-          <p class="subtitle">
-            Flash firmware, then connect over serial and send Wi-Fi credentials and your Torn API key.
-          </p>
-        </div>
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-top">
+        <h1>Torn Dashboard ESP32 Setup</h1>
+        <a
+          class="github-link"
+          href="https://github.com/Bronom/Torn_Dashboard_Setup"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub repository"
+        >
+          GitHub
+        </a>
       </div>
+      <p>
+        Flash firmware, then connect over serial and send Wi-Fi credentials and
+        your Torn API key.
+      </p>
+    </header>
 
-      <div class="status-strip">
-        <div class="badge">
-          <span id="connDot" class="dot"></span>
-          <span id="connText">Disconnected</span>
-        </div>
-        <div class="badge">
-          <span id="readyDot" class="dot"></span>
-          <span id="readyText">Waiting for device</span>
-        </div>
+    <section class="status-row">
+      <div class="status-pill">
+        <span id="connDot" class="dot"></span>
+        <span id="connText">Disconnected</span>
       </div>
-    </div>
+      <div class="status-pill">
+        <span id="readyDot" class="dot"></span>
+        <span id="readyText">Waiting for device</span>
+      </div>
+    </section>
 
-    <div class="main">
-      <aside class="sidebar">
-        <div class="card">
-          <h2 class="card-title">Control Console</h2>
-          <p class="card-subtitle">
-            Connect first. The Send button unlocks only when the ESP32 reports <strong>WAITING_CONFIG</strong>.
-          </p>
+    <main class="grid">
+      <section class="panel">
+        <h2>Control Console</h2>
+        <p class="subtle">
+          Connect first. The Send button unlocks only when the ESP32 reports
+          <strong>WAITING_CONFIG</strong>.
+        </p>
 
-          <div class="grid">
-            <div class="field">
-              <label for="ssid">WiFi SSID</label>
-              <input id="ssid" placeholder="Enter your WiFi network name" />
-            </div>
+        <div class="field">
+          <label for="ssid">WiFi SSID</label>
+          <input
+            id="ssid"
+            type="text"
+            placeholder="Enter your WiFi network name"
+            autocomplete="off"
+          />
+        </div>
 
-            <div class="field">
-              <label for="pass">WiFi Password</label>
-              <div class="input-with-button">
-                <input id="pass" type="password" placeholder="Enter your WiFi password" />
-                <button id="togglePassBtn">Show</button>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="api">Torn API Key</label>
-              <input id="api" placeholder="Enter your Torn API key" />
-            </div>
+        <div class="field">
+          <label for="pass">WiFi Password</label>
+          <div class="input-with-button">
+            <input
+              id="pass"
+              type="password"
+              placeholder="Enter your WiFi password"
+              autocomplete="off"
+            />
+            <button id="togglePassBtn" type="button">Show</button>
           </div>
+        </div>
 
-          <div class="actions">
-            <button id="connectBtn" class="btn-secondary">Connect ESP32</button>
-            <button id="sendBtn" class="btn-primary" disabled>Send Config</button>
-          </div>
+        <div class="field">
+          <label for="api">Torn API Key</label>
+          <input
+            id="api"
+            type="text"
+            placeholder="Enter your Torn API key"
+            autocomplete="off"
+          />
         </div>
 
         <div class="advanced-config">
@@ -87,113 +94,115 @@
             <span>Advanced Setup (JSON)</span>
           </label>
 
-          <div id="advancedJsonWrap" style="display: none;">
+          <div id="advancedJsonWrap" class="advanced-json-wrap" hidden>
             <label for="advancedJson">Advanced JSON Config</label>
-
             <textarea
               id="advancedJson"
               rows="12"
               spellcheck="false"
-          >{
-            "wifi": [
-              { "ssid": "SSID", "pass": "PASSWORD" },
-              { "ssid": "SSID_2", "pass": "PASSWORD_2" }
-            ],
-            "api": "YOUR_TORN_API_KEY"
-          }</textarea>
-          </div>
+>{
+  "wifi": [
+    { "ssid": "SSID", "pass": "PASSWORD" },
+    { "ssid": "SSID_2", "pass": "PASSWORD_2" }
+  ],
+  "api": "YOUR_TORN_API_KEY"
+}</textarea>
             <p class="helper-text">
               When enabled, this JSON will be sent instead of the WiFi / Password / API fields.
             </p>
           </div>
         </div>
 
-        <div class="card">
-          <h2 class="card-title">Firmware</h2>
-          <p class="card-subtitle">
-            Select the hardware version, then install the matching firmware.
-          </p>
-
-          <div class="firmware-box">
-            <div class="field">
-              <label for="project">Project Version</label>
-              <select id="project">
-                <option value="" selected>Select a project version...</option>
-                <option value="4inch">4 Inch TFT</option>
-                <option value="2_8inch">2.8 Inch TFT</option>
-                <option value="eink213">E-Ink 2.13</option>
-              </select>
-            </div>
-
-            <div id="firmwareError" class="firmware-error" hidden>
-              Please select a project version before installing firmware.
-            </div>
-
-            <div class="manifest-row">
-              <span class="manifest-pill">Source: Local GitHub Pages file</span>
-              <span class="manifest-pill" id="firmwareProjectLabel">Project: None</span>
-            </div>
-
-            <esp-web-install-button id="installBtn">
-              <button id="flashBtn" slot="activate" class="btn-flash" disabled>
-                Install / Update Firmware
-              </button>
-              <span slot="unsupported">
-                Your browser does not support firmware flashing.<br>
-                Please use Chrome or Edge.
-              </span>
-            </esp-web-install-button>
-
-            <div class="firmware-note">
-              Flash the firmware for the selected hardware, then reconnect and send WiFi and API configuration.
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 class="card-title">Operator Notes</h2>
-          <ul class="hint-list">
-            <li>Use Chrome or Edge.</li>
-            <li>Close Arduino Serial Monitor first.</li>
-            <li>Flash firmware before sending config on a new board.</li>
-            <li>After flashing, reconnect and wait for config mode.</li>
-            <li>After save, the board should reboot automatically.</li>
-          </ul>
-        </div>
-      </aside>
-
-      <section class="workspace">
-        <div class="hud-grid">
-          <div class="hud-box">
-            <div class="hud-label">Link</div>
-            <div id="hudLink" class="hud-value red">Offline</div>
-          </div>
-          <div class="hud-box">
-            <div class="hud-label">Config State</div>
-            <div id="hudReady" class="hud-value blue">Standby</div>
-          </div>
-          <div class="hud-box">
-            <div class="hud-label">Last Action</div>
-            <div id="hudAction" class="hud-value green">Idle</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="log-header">
-            <h2 class="card-title" style="margin:0;">Serial Log</h2>
-            <button id="clearLogBtn" class="small-btn">Clear Log</button>
-          </div>
-          <div id="log" class="log">Log started...</div>
+        <div class="button-row">
+          <button id="connectBtn" type="button">Connect ESP32</button>
+          <button id="sendBtn" type="button" disabled>Send Config</button>
         </div>
       </section>
-    </div>
+
+      <section class="panel">
+        <h2>Firmware</h2>
+        <p class="subtle">
+          Select the hardware version, then install the matching firmware.
+        </p>
+
+        <div class="field">
+          <label for="project">Project Version</label>
+          <select id="project">
+            <option value="">Select a project version...</option>
+            <option value="tft4">4 Inch TFT</option>
+            <option value="tft28">2.8 Inch TFT</option>
+            <option value="t5">E-Ink 2.13</option>
+          </select>
+        </div>
+
+        <p id="firmwareError" class="error-text" hidden>
+          Please select a project version before installing firmware.
+        </p>
+
+        <div class="firmware-meta">
+          <span>Source: <strong>Local GitHub Pages file</strong></span>
+          <span id="firmwareProjectLabel">Project: None</span>
+        </div>
+
+        <div class="button-stack">
+          <esp-web-install-button id="installBtn" manifest="manifest/manifest.json">
+            <button slot="activate" id="flashBtn" type="button">
+              Install / Update Firmware
+            </button>
+          </esp-web-install-button>
+          <p class="subtle">
+            Your browser does not support firmware flashing.<br />
+            Please use Chrome or Edge.
+          </p>
+        </div>
+
+        <p class="subtle">
+          Flash the firmware for the selected hardware, then reconnect and send
+          WiFi and API configuration.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Operator Notes</h2>
+        <ul class="notes">
+          <li>Use Chrome or Edge.</li>
+          <li>Close Arduino Serial Monitor first.</li>
+          <li>Flash firmware before sending config on a new board.</li>
+          <li>After flashing, reconnect and wait for config mode.</li>
+          <li>After save, the board should reboot automatically.</li>
+        </ul>
+      </section>
+
+      <section class="panel hud">
+        <div class="hud-item">
+          <div class="hud-label">Link</div>
+          <div id="hudLink" class="hud-value red">Offline</div>
+        </div>
+        <div class="hud-item">
+          <div class="hud-label">Config State</div>
+          <div id="hudReady" class="hud-value blue">Standby</div>
+        </div>
+        <div class="hud-item">
+          <div class="hud-label">Last Action</div>
+          <div id="hudAction" class="hud-value blue">Idle</div>
+        </div>
+      </section>
+
+      <section class="panel panel-full">
+        <div class="panel-header">
+          <h2>Serial Log</h2>
+          <button id="clearLogBtn" type="button">Clear Log</button>
+        </div>
+        <div id="log" class="log">Log started...</div>
+      </section>
+    </main>
   </div>
 
-  <div id="toast" class="toast">
-    <div class="toast-title">Configuration saved</div>
-    <div class="toast-text">Your ESP32 received the settings and should reboot automatically.</div>
+  <div id="toast" class="toast" role="status" aria-live="polite">
+    <strong>Configuration saved</strong><br />
+    Your ESP32 received the settings and should reboot automatically.
   </div>
 
-  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 </html>

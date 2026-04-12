@@ -6,7 +6,7 @@ export function createSerialController(ui) {
   async function connect() {
     try {
       if (!("serial" in navigator)) {
-        ui.log("Web Serial is not supported in this browser. Use Chrome or Edge.", "error");
+        ui.log("Web Serial is not supported in this browser.<br>Use Chrome or Edge.");
         ui.setAction("Unsupported", "red");
         return;
       }
@@ -16,18 +16,15 @@ export function createSerialController(ui) {
       ui.setAction("Selecting port", "blue");
 
       port = await navigator.serial.requestPort();
-      const info = port.getInfo();
 
+      const info = port.getInfo();
       ui.log(`Selected port VID=${info.usbVendorId || "?"} PID=${info.usbProductId || "?"}`);
 
       await port.open({ baudRate: 115200 });
 
       ui.setConnected(true);
       ui.setAction("Connected", "green");
-      ui.log("ESP32 connected", "success");
-
-      espReady = true;
-      ui.setReady("ready");
+      ui.log("ESP32 connected");
 
       const decoder = new TextDecoderStream();
       port.readable.pipeTo(decoder.writable).catch(() => {});
@@ -41,7 +38,6 @@ export function createSerialController(ui) {
         if (!value) continue;
 
         buffer += value;
-
         const lines = buffer.split(/\r?\n/);
         buffer = lines.pop();
 
@@ -49,7 +45,7 @@ export function createSerialController(ui) {
           const clean = line.trim();
           if (!clean) continue;
 
-          ui.log("ESP32: " + clean, "esp");
+          ui.log("ESP32: " + clean);
 
           if (
             clean.includes("WAITING_CONFIG") ||
@@ -62,20 +58,17 @@ export function createSerialController(ui) {
             ui.setAction("Config mode", "green");
           }
 
-          if (
-            clean.includes("CONFIG_SAVED") ||
-            clean.includes("Config saved")
-          ) {
+          if (clean.includes("CONFIG_SAVED") || clean.includes("Config saved")) {
             espReady = false;
             ui.setReady("waiting");
             ui.setAction("Saved", "green");
             ui.showToast();
-            ui.log("Configuration saved. ESP32 should reboot.", "success");
+            ui.log("Configuration saved.<br>ESP32 should reboot.");
           }
 
           if (clean.includes("JSON_ERROR")) {
             ui.setAction("JSON error", "red");
-            ui.log("ESP32 reported JSON_ERROR", "error");
+            ui.log("ESP32 reported JSON_ERROR");
           }
         }
       }
@@ -83,7 +76,7 @@ export function createSerialController(ui) {
       ui.setConnected(false);
       ui.setReady("idle");
       ui.setAction("Connect failed", "red");
-      ui.log("Connect error: " + err.message, "error");
+      ui.log("Connect error: " + err.message);
     }
   }
 
@@ -92,29 +85,28 @@ export function createSerialController(ui) {
       ui.log("Send button clicked");
 
       if (!port || !port.writable) {
-        ui.log("Connect the ESP32 first.", "error");
+        ui.log("Connect the ESP32 first.");
         ui.setAction("No device", "red");
         return;
       }
 
       const config = ui.getConfigValues();
-
       let payloadObject;
 
       if (config.mode === "advanced") {
         if (!config.wifi || !config.wifi.length || !config.api) {
-          ui.log("Advanced JSON must contain wifi[] and api.", "error");
+          ui.log("Advanced JSON must contain wifi[] and api.");
           ui.setAction("Missing JSON fields", "red");
           return;
         }
 
         payloadObject = {
           wifi: config.wifi,
-          api: config.api
+          api: config.api,
         };
       } else {
         if (!config.ssid || !config.api) {
-          ui.log("SSID and API key are required.", "error");
+          ui.log("SSID and API key are required.");
           ui.setAction("Missing fields", "red");
           return;
         }
@@ -122,7 +114,7 @@ export function createSerialController(ui) {
         payloadObject = {
           ssid: config.ssid,
           pass: config.pass,
-          api: config.api
+          api: config.api,
         };
       }
 
@@ -146,11 +138,10 @@ export function createSerialController(ui) {
             JSON.stringify({
               wifi: payloadObject.wifi.map((w) => ({
                 ssid: w.ssid,
-                pass: w.pass ? "***" : ""
+                pass: w.pass ? "***" : "",
               })),
-              api: "***"
-            }),
-          "success"
+              api: "***",
+            })
         );
       } else {
         ui.log(
@@ -158,19 +149,15 @@ export function createSerialController(ui) {
             JSON.stringify({
               ssid: payloadObject.ssid,
               pass: payloadObject.pass ? "***" : "",
-              api: "***"
-            }),
-          "success"
+              api: "***",
+            })
         );
       }
     } catch (err) {
-      ui.log("Send error: " + err.message, "error");
+      ui.log("Send error: " + err.message);
       ui.setAction("Send failed", "red");
     }
   }
 
-  return {
-    connect,
-    send
-  };
+  return { connect, send };
 }

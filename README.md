@@ -3,7 +3,7 @@
 <p align="left">
   <img src="https://github.com/user-attachments/assets/8ffd62d3-bffb-483d-878e-4e102d5eaf75"
        alt="Torn Dashboard"
-       width="500"
+       width="450"
        align="right"
        style="margin-left: 15px;" />
 

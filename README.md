@@ -194,6 +194,8 @@ The **E-Ink version** is designed for a low-power, always-on display where you d
 
 Or check In the file list.
 
+Idea : In case you didn't a 3D Printer you could make one with the box the screen come with and with some screw of glue.
+
 ---
 
 # Flashing the board

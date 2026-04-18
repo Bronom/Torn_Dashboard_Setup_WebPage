@@ -1,4 +1,4 @@
-# Torn Dashboard ESP32 TFT
+# [Torn Dashboard ESP32 TFT](https://bronom.github.io/Torn_Dashboard_Setup/ "Torn Dashboard ESP32 TFT")
 
 <p align="left">
   <img src="https://github.com/user-attachments/assets/8ffd62d3-bffb-483d-878e-4e102d5eaf75"

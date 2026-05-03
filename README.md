@@ -183,12 +183,13 @@ The **E-Ink version** is designed for a low-power, always-on display where you d
 ### Required Parts
 ⚠️ **Important:** Please verify you got the good part. The link only redirect to the page listing not the right version or size.**.
 
-| Part                                                                                              | Description                                              | Link |
-| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---- |
-| Lilygo T5 2.13 Inch E-ink (With on board chip. Micro USB Version) (I used the GDEM0213B74 CH9102) | Main microcontroller                                     | [Aliexpress](https://www.aliexpress.com/item/32869729970.html "Lilygo T5 2.13 Inch E-ink GDEM0213B74 CH9102") |
-| JST 1.25mm 2pin 603450 3.7V 1200mAh Li-Polymer Li-ion Battery                                     | Battery (Optionnal)                                      | [Aliexpress](https://www.aliexpress.com/item/1005008650516897.html "JST 1.25mm 2pin 603450") |
-| M3 6mm, Screw Allen flat head screw, x2 (Pack of 50pcs)                                           | Screw with flat head to stay flush with the case         | [Aliexpress](https://www.aliexpress.com/item/1005008650516897.html "M3 50pcs, 6mm") |
-| M6 Brass Heat Insert x2                                                                           | Insert to screw the back plate (Soldering iron required) | [Aliexpress](https://www.aliexpress.com/item/1005008650516897.html "Length 4mm 50pcs, M6(OD 8mm)") |
+| Part                                                                                              | Description                                                 | Link |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ---- |
+| Lilygo T5 2.13 Inch E-ink (With on board chip. Micro USB Version) (I used the GDEM0213B74 CH9102) | Main microcontroller                                        | [Aliexpress](https://www.aliexpress.com/item/32869729970.html "Lilygo T5 2.13 Inch E-ink GDEM0213B74 CH9102") |
+| JST 1.25mm 2pin 603450 3.7V 1200mAh Li-Polymer Li-ion Battery                                     | Battery (Optionnal)                                         | [Aliexpress](https://www.aliexpress.com/item/1005008650516897.html "JST 1.25mm 2pin 603450") |
+| M3 6mm, Screw Allen flat head screw, x2 (Pack of 50pcs)                                           | Screw with flat head to stay flush with the case            | [Aliexpress](https://www.aliexpress.com/item/1005008650516897.html "M3 50pcs, 6mm") |
+| M6 Brass Heat Insert x2                                                                           | Insert to screw the back plate (Soldering iron required)    | [Aliexpress](https://www.aliexpress.com/item/1005008650516897.html "Length 4mm 50pcs, M6(OD 8mm)") |
+| Double sided tape (Square 30MMx30MM) Or any other variant                                         | To keep the battery from moving inside the case (Optionnal) | [Aliexpress](https://www.aliexpress.com/item/1005008041560314.html "Square 30MMx30MM") |
 
 3D Printed Case : [Makerworld](https://makerworld.com/en/models/1427537-lilygo-t5-2-13-3d-printed-case#profileId-1483837 "Lilygo T5 2.13\" 3d printed case") 
 
